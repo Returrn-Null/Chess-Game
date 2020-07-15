@@ -46,6 +46,7 @@ class GameSetup extends JDialog {
         myPanel.add(blackComputerButton);
 
         myPanel.add(new JLabel("Search"));
+        //search depth for the AI.
         this.searchDepthSpinner = addLabeledSpinner(myPanel, "Search Depth", new SpinnerNumberModel(6, 0, Integer.MAX_VALUE, 1));
 
         final JButton cancelButton = new JButton("Cancel");
