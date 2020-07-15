@@ -385,6 +385,9 @@ public class Table {
 		}
 	}
 	
-	
+	enum PlayerType{
+		HUMAN,
+		COMPUTER;
+	}
 	
 }
