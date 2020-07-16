@@ -17,7 +17,7 @@ import gui.Table.MoveLog;
 
 public class GameLogPanel extends JPanel{
 
-	private static final Dimension HISTORY_PANEL_DIMENSION = new Dimension(100,400);;
+	private static final Dimension HISTORY_PANEL_DIMENSION = new Dimension(100,40);
 	private final DataModel model;
 	private final JScrollPane scrollPane;
 	

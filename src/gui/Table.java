@@ -1,7 +1,10 @@
 package gui;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -26,6 +29,7 @@ import Board.*;
 import Board.Move.MoveFactory;
 import Pieces.Piece;
 import Player.MoveTransition;
+import static javax.swing.JFrame.setDefaultLookAndFeelDecorated;
 
 @SuppressWarnings("deprecation")
 public class Table extends Observable {
@@ -39,7 +43,7 @@ public class Table extends Observable {
     
     private final GameSetup gameSetup;
     
-    
+    private final DebugPanel debugPanel;
 	private final static Dimension TILE_PANEL_DIMENSION = new Dimension(10,10);
 	private static final Dimension BOARD_PANEL_DIMENSION = new Dimension(400,350);
 	private static final Dimension OUTER_FRAME_DIMENSION = new Dimension(600,600);
@@ -66,8 +70,10 @@ public class Table extends Observable {
 		this.gameFrame.setLayout(new BorderLayout());
 		final JMenuBar tableMenuBar = createTableMenuBar();	
 		this.gameFrame.setJMenuBar(tableMenuBar);
-		this.gameFrame.setSize(OUTER_FRAME_DIMENSION);	
+		this.gameFrame.setSize(OUTER_FRAME_DIMENSION);
+		//this.gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.boardPanel = new BoardPanel();
+		this.debugPanel = new DebugPanel();
 		this.moveLog = new MoveLog();
 		this.addObserver(new TableGameAIWatcher());
 		this.gameSetup = new GameSetup(this.gameFrame, true);
@@ -76,6 +82,8 @@ public class Table extends Observable {
 		this.gameFrame.add(this.takenPiecePanel,BorderLayout.WEST);
 		this.gameFrame.add(this.boardPanel,BorderLayout.CENTER);
 		this.gameFrame.add(this.gameLog,BorderLayout.EAST);
+		this.gameFrame.add(debugPanel, BorderLayout.SOUTH);
+		setDefaultLookAndFeelDecorated(true);
 		this.gameFrame.setVisible(true);
 	}
 	
@@ -301,6 +309,10 @@ public class Table extends Observable {
 				this.boardTiles.add(tilePanel);
 				add(tilePanel);
 			}
+			setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            setBackground(Color.decode("#8B4726"));
+			
+	
 			setPreferredSize(BOARD_PANEL_DIMENSION);
 			validate();
 		}
