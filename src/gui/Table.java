@@ -458,16 +458,26 @@ public class Table extends Observable {
 		}
 		
 		private Collection<Move> pieceLegalMoves(final Board board){
+			
 			if(humanMovedPiece != null && humanMovedPiece.getPieceColor() == board.getCurrentPlayer().getColor()) {
-				if(humanMovedPiece.getPieceType().isKing()) {
-					Collection<Move> moves = humanMovedPiece.findLegalMoves(board);
-					for(final Move move : board.getCurrentPlayer().calculateKingCastles(board.getCurrentPlayer().getLegalMoves(),board.getCurrentPlayer().getOpponent().getLegalMoves())) {
-						moves.add(move);
+				Collection<Move> moves = new ArrayList<>();
+				for(Move move : board.getCurrentPlayer().getLegalMoves()) {
+					if(move.getMovedPiece().equals(humanMovedPiece)) {
+						if(board.getCurrentPlayer().makeMove(move).getMoveStatus().isDone()) {
+							moves.add(move);
+						}
 					}
-					return moves;
-				}else {
-					return humanMovedPiece.findLegalMoves(board);
-				}	
+				}
+				return moves;
+//				if(humanMovedPiece.getPieceType().isKing()) {
+//					Collection<Move> moves = humanMovedPiece.findLegalMoves(board);
+//					for(final Move move : board.getCurrentPlayer().calculateKingCastles(board.getCurrentPlayer().getLegalMoves(),board.getCurrentPlayer().getOpponent().getLegalMoves())) {
+//						moves.add(move);
+//					}
+//					return moves;
+//				}else {
+//					return humanMovedPiece.findLegalMoves(board);
+//				}	
 			}
 			return Collections.emptyList();
 		}
