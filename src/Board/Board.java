@@ -198,4 +198,15 @@ public class Board {
 		return Collections.unmodifiableCollection(allLegalMoves);
 	}
 	
+	public Collection<Piece> getAllPieces(){
+		Collection<Piece> allPieces = new ArrayList<>();
+		for(int i = 0; i<=63;i++) {
+			Tile tile = getTile(i);
+			if(tile.isOccupied()) {
+				allPieces.add(tile.getPiece());
+			}
+		}
+		return allPieces;
+	}
+	
 }

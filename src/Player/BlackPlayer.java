@@ -24,13 +24,16 @@ public class BlackPlayer extends Player {
 		final List<Move> kingCastles = new ArrayList<>();
 		
 		if(this.playerKing.isFirstMove() && !this.isInCheck()) {
-			//White king side
+			//black king side
 			if(!this.board.getTile(5).isOccupied() && !this.board.getTile(6).isOccupied()) {
 				final Tile rookTile = this.board.getTile(7);
+				final Tile kingTile = this.board.getTile(4);
 				
-				if(rookTile.isOccupied() && rookTile.getPiece().isFirstMove()) {
+				if(rookTile.isOccupied() && rookTile.getPiece().isFirstMove() &&
+				   kingTile.isOccupied() && kingTile.getPiece().isFirstMove()) {
 					if(Player.calculateAttacksOnTile(5, opponentsLegals).isEmpty() &&
 					   Player.calculateAttacksOnTile(6, opponentsLegals).isEmpty() &&
+					   Player.calculateAttacksOnTile(4, opponentsLegals).isEmpty() &&
 					   rookTile.getPiece().getPieceType().isRook()) {
 						kingCastles.add(new Move.KingSideCastleMove(this.board,this.playerKing,6,5,rookTile.getTileCoordinate(),(Rook)rookTile.getPiece()));
 					}
@@ -38,14 +41,15 @@ public class BlackPlayer extends Player {
 			}
 			//queen side
 			if(!this.board.getTile(1).isOccupied() && !this.board.getTile(2).isOccupied() && !this.board.getTile(3).isOccupied()) {
-				
 				final Tile rookTile = this.board.getTile(0);
-				if(rookTile.isOccupied() && rookTile.getPiece().isFirstMove()) {
+				final Tile kingTile = this.board.getTile(4);
+				if(rookTile.isOccupied() && rookTile.getPiece().isFirstMove() && kingTile.isOccupied() && kingTile.getPiece().isFirstMove()) {
 					if(Player.calculateAttacksOnTile(2, opponentsLegals).isEmpty() &&
-							   Player.calculateAttacksOnTile(3, opponentsLegals).isEmpty() &&
-							   rookTile.getPiece().getPieceType().isRook()) {
+					   Player.calculateAttacksOnTile(3, opponentsLegals).isEmpty() &&
+					   Player.calculateAttacksOnTile(4, opponentsLegals).isEmpty() &&
+					   rookTile.getPiece().getPieceType().isRook()) {
 						kingCastles.add(new Move.QueenSideCastleMove(this.board, this.playerKing, 2, 3, rookTile.getTileCoordinate(), (Rook) rookTile.getPiece()));
-							}					
+					}					
 				}
 				
 			}
