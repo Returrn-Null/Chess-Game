@@ -5,15 +5,21 @@ import Player.Color;
 import gui.Table.PlayerType;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 class GameSetup extends JDialog {
 
     private PlayerType whitePlayerType;
     private PlayerType blackPlayerType;
     private JSpinner searchDepthSpinner;
+    private SpinnerNumberModel spinnerNumModel;
 
     private static final String HUMAN_TEXT = "Human";
     private static final String COMPUTER_TEXT = "Computer";
@@ -47,8 +53,8 @@ class GameSetup extends JDialog {
 
         myPanel.add(new JLabel("Search"));
         //search depth for the AI.
-        this.searchDepthSpinner = addLabeledSpinner(myPanel, "Search Depth", new SpinnerNumberModel(6, 0, Integer.MAX_VALUE, 1));
-
+        this.spinnerNumModel = new SpinnerNumberModel(6, 0, Integer.MAX_VALUE, 1);
+        this.searchDepthSpinner = addLabeledSpinner(myPanel, "Search Depth", this.spinnerNumModel );
         final JButton cancelButton = new JButton("Cancel");
         final JButton okButton = new JButton("OK");
 
@@ -73,6 +79,10 @@ class GameSetup extends JDialog {
         setLocationRelativeTo(frame);
         pack();
         setVisible(false);
+    }
+    
+    public SpinnerNumberModel getSpinnerNumModel() {
+    	return this.spinnerNumModel;
     }
 
     void promptUser() {

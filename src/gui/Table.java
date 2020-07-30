@@ -91,6 +91,7 @@ public class Table extends Observable {
 		return INSTANCE;
 	}
 	
+	
 	public void show() {
 		 Table.get().getMoveLog().clear();
 	        Table.get().getGameLogPanel().redo(chessBoard, Table.get().getMoveLog());
@@ -239,8 +240,9 @@ public class Table extends Observable {
 		
 		@Override
 		protected Move doInBackground() throws Exception{
+			int n = (int) Table.get().getGameSetup().getSpinnerNumModel().getValue();
 			
-			final MoveStrategy minimax = new Minimax(4);
+			final MoveStrategy minimax = new Minimax(n);//TODO here
 			final Move bestAIMove = minimax.execute(Table.get().getGameBoard()); 
 			return bestAIMove;
 		}
