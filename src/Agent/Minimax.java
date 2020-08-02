@@ -1,8 +1,11 @@
 package Agent;
 
+import java.util.Collection;
+
 import Board.Board;
 import Board.Move;
 import Player.MoveTransition;
+import Player.Player;
 
 public class Minimax implements MoveStrategy{
 
@@ -172,5 +175,20 @@ public class Minimax implements MoveStrategy{
 			}
 			return lowestSeenValue;
 		}
+	}
+	
+	/**
+	 * method to order the moves before they get treated by minimax,
+	 * to optimize alpha beta pruning
+	 * @param player
+	 * @return
+	 */
+	public Collection<Move> MoveOrdering(Player player){
+		//TODO create getLegalMoves that returns hashmap
+		for(Move move: player.getLegalMoves()) {
+			
+		}
+	return null;
+		
 	}
 }

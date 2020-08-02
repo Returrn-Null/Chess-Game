@@ -242,7 +242,7 @@ public class Table extends Observable {
 		protected Move doInBackground() throws Exception{
 			int n = (int) Table.get().getGameSetup().getSpinnerNumModel().getValue();
 			
-			final MoveStrategy minimax = new Minimax(n);//TODO here
+			final MoveStrategy minimax = new Minimax(n);
 			final Move bestAIMove = minimax.execute(Table.get().getGameBoard()); 
 			return bestAIMove;
 		}
